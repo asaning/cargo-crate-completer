@@ -36,9 +36,9 @@ async function CrateNameProvideCompletionItems(document, position) {
     crateName = "";
   if (dependencies === "") {
     return null;
-  } else if (dependencies.includes(".")) {
-    let index = dependencies.indexOf(".");
-    crateName = dependencies.substring(index + 1);
+  } else if (dependencies.includes("dependencies.")) {
+    let index = dependencies.lastIndexOf(".");
+    crateName = dependencies.substring(index + "dependencies.".length);
   } else if (dependencies.includes("dependencies")) {
     crateName = line.text.substring(0, position.character);
   }
@@ -71,8 +71,8 @@ async function CrateVersionProvideCompletionItems(document, position) {
     crateName = "";
   if (dependencies === "") {
     return null;
-  } else if (dependencies.includes(".")) {
-    let index = dependencies.indexOf(".");
+  } else if (dependencies.includes("dependencies.")) {
+    let index = dependencies.lastIndexOf(".");
     crateName = dependencies.substring(index + 1) + "=";
   }
   let text = line.text.substring(0, position.character);
@@ -136,8 +136,8 @@ async function CrateFeatureProvideCompletionItems(document, position) {
     crateName = "";
   if (dependencies === "") {
     return null;
-  } else if (dependencies.includes(".")) {
-    let index = dependencies.indexOf(".");
+  } else if (dependencies.includes("dependencies.")) {
+    let index = dependencies.lastIndexOf(".");
     crateName = dependencies.substring(index + 1) + "=";
   }
 
